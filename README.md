@@ -6,7 +6,9 @@
 
 Un script Tampermonkey qui permet de désactiver le système de surveillance de focus sur la plateforme Pix, vous permettant de faire des recherches librement pendant les épreuves. 🚫👀
 
-![Interface du script](https://i.imgur.com/placeholder.png)
+<p align="center">
+    <img src="https://i.ibb.co/6WfFhYX/image-2024-12-16-170516085.png" alt="Interface Pix Focus Bypass" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
+</p>
 
 ## ❓ Besoin d'aide ?
 
