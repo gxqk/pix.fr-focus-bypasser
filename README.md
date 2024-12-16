@@ -8,6 +8,15 @@ Un script Tampermonkey qui permet de désactiver le système de surveillance de 
 
 ![Interface du script](https://i.imgur.com/placeholder.png)
 
+## ❓ Besoin d'aide ?
+
+> ### 🎮 Contact Support
+> ```diff
+> + 👾 Discord : gxqk
+> + 💭 Questions ? DM moi !
+> + 🚀 Réponse rapide garantie
+> ```
+
 ## ⭐ Points Forts
 
 ```diff
@@ -83,15 +92,6 @@ Un script Tampermonkey qui permet de désactiver le système de surveillance de 
 ```diff
 + 🐛 Reporter des bugs
 + 💡 Proposer des idées
-+ 🔧 Soumettre du code
-+ 📚 Améliorer la documentation
-```
-
-## 📄 Licence
-
-```yaml
-📜 Licence : MIT
-📋 Détails : Voir LICENSE
 ```
 
 ## 👨‍💻 Créateur
@@ -111,6 +111,5 @@ Un script Tampermonkey qui permet de désactiver le système de surveillance de 
 ---
 <div align="center">
     <img src="https://img.shields.io/badge/version-1.0-blue.svg" alt="version"/>
-    <img src="https://img.shields.io/badge/license-MIT-green.svg" alt="license"/>
     <img src="https://img.shields.io/badge/made%20with-❤️-red.svg" alt="made with love"/>
 </div>
