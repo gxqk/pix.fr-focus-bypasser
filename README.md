@@ -43,7 +43,7 @@ Un script Tampermonkey qui permet de désactiver le système de surveillance de 
 ### 2️⃣ Installation du Script
 > 📥 Deux méthodes simples :
 ```diff
-+ 🔄 Méthode 1 : Cliquez sur [Installer Pix Focus Bypass](raw/tampermonkey.js)
++ 🔄 Méthode 1 : Cliquez sur [Installer Pix Focus Bypass](En cours de dev...)
 + 📝 Méthode 2 : Copiez-collez le contenu de tampermonkey.js dans un nouveau script
 ```
 
