@@ -12,7 +12,6 @@
 (function() {
     'use strict';
 
-    // État initial
     let isEnabled = GM_getValue('pixOverrideEnabled', true);
     let isDarkMode = GM_getValue('pixOverrideDarkMode', false);
     let originalFunctions = {};
@@ -20,7 +19,6 @@
     let uiElement = null;
     let uiStyleElement = null;
 
-    // Fonction pour générer les styles UI en fonction du thème
     function generateUIStyles(darkMode) {
         return `
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
@@ -147,20 +145,14 @@
         }
     `;
 
-    // Fonction pour mettre à jour le thème
     function updateTheme(darkMode) {
-        // Supprimer les anciens éléments
         if (uiStyleElement) {
             uiStyleElement.remove();
         }
         if (uiElement) {
             const wasMinimized = uiElement.classList.contains('minimized');
             uiElement.remove();
-
-            // Recréer avec le nouveau thème
             createUI();
-
-            // Restaurer l'état minimisé si nécessaire
             if (wasMinimized) {
                 const newUI = document.querySelector('.pix-override-ui');
                 const minimizeBtn = newUI.querySelector('.pix-override-minimize');
@@ -170,9 +162,7 @@
         }
     }
 
-    // Création de l'interface
     function createUI() {
-        // Styles de l'interface
         uiStyleElement = document.createElement('style');
         uiStyleElement.textContent = generateUIStyles(isDarkMode);
         document.head.appendChild(uiStyleElement);
@@ -192,7 +182,6 @@
         `;
         document.body.appendChild(uiElement);
 
-        // Gestion des événements
         const toggle = uiElement.querySelector('.pix-override-toggle');
         const status = uiElement.querySelector('.pix-override-status');
         const minimize = uiElement.querySelector('.pix-override-minimize');
@@ -218,9 +207,7 @@
         });
     }
 
-    // Fonctions de surcharge
     function applyOverride() {
-        // Sauvegarde des fonctions originales si pas déjà fait
         if (!originalFunctions.hasFocus) {
             originalFunctions.hasFocus = document.hasFocus;
             originalFunctions.addEventListener = EventTarget.prototype.addEventListener;
@@ -228,12 +215,10 @@
             originalFunctions.CustomEvent = window.CustomEvent;
         }
 
-        // Surcharge de document.hasFocus
         document.hasFocus = function() {
             return true;
         };
 
-        // Empêcher la création des écouteurs d'événements de focus
         EventTarget.prototype.addEventListener = function(type, listener, options) {
             if (type === 'blur' || type === 'focusout' || type === 'focusedout') {
                 return;
@@ -241,12 +226,10 @@
             return originalFunctions.addEventListener.call(this, type, listener, options);
         };
 
-        // Surcharge de window.blur
         window.blur = function() {
             return null;
         };
 
-        // Surcharge de CustomEvent
         window.CustomEvent = function(type, eventInitDict) {
             if (type === 'focusedout') {
                 return null;
@@ -254,7 +237,6 @@
             return new originalFunctions.CustomEvent(type, eventInitDict);
         };
 
-        // Nettoyer le localStorage
         const keysToClean = [
             'hasConfirmedFocusChallengeScreen',
             'focusState',
@@ -262,40 +244,32 @@
         ];
         keysToClean.forEach(key => localStorage.removeItem(key));
 
-        // Ajouter les styles d'override
         if (!styleElement) {
             styleElement = document.createElement('style');
             styleElement.textContent = overrideStyles;
             document.head.appendChild(styleElement);
         }
 
-        // Désactiver les intervalles
         clearFocusIntervals();
     }
 
-    // Fonction pour restaurer les fonctions originales
     function removeOverride() {
         if (originalFunctions.hasFocus) {
             document.hasFocus = originalFunctions.hasFocus;
             EventTarget.prototype.addEventListener = originalFunctions.addEventListener;
             window.blur = originalFunctions.blur;
             window.CustomEvent = originalFunctions.CustomEvent;
-
-            // Réinitialiser les fonctions sauvegardées
             originalFunctions = {};
         }
 
-        // Supprimer les styles d'override
         if (styleElement) {
             styleElement.remove();
             styleElement = null;
         }
 
-        // Restaurer le localStorage si nécessaire
         localStorage.removeItem('hasConfirmedFocusChallengeScreen');
     }
 
-    // Fonction pour désactiver les intervalles
     function clearFocusIntervals() {
         const intervals = window.setInterval(() => {}, 100000);
         for(let i = 0; i < intervals; i++) {
@@ -303,7 +277,6 @@
         }
     }
 
-    // Fonction pour basculer l'état
     function toggleOverride(enabled) {
         if (enabled) {
             applyOverride();
@@ -312,13 +285,11 @@
         }
     }
 
-    // Initialisation
     createUI();
     if (isEnabled) {
         applyOverride();
     }
 
-    // Nettoyage périodique des intervalles si activé
     setInterval(() => {
         if (isEnabled) {
             clearFocusIntervals();
